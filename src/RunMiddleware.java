@@ -35,13 +35,13 @@ public class RunMiddleware {
 			configFile.load(new FileInputStream("configuration.conf"));
 
 			mLocation = configFile.getProperty("mysql.location");
-			mDatabase = configFile.getProperty("mysql.databse");
+			mDatabase = configFile.getProperty("mysql.database");
 			mUsername = configFile.getProperty("mysql.dbuser");
 			mPassword = configFile.getProperty("mysql.dbpassword");
 			mUrl = "jdbc:mysql://" + mLocation + "/" + mDatabase;
 
 			pLocation = configFile.getProperty("postgresql.location");
-			pDatabase = configFile.getProperty("postgresql.databse");
+			pDatabase = configFile.getProperty("postgresql.database");
 			pUsername = configFile.getProperty("postgresql.dbuser");
 			pPassword = configFile.getProperty("postgresql.dbpassword");
 			pUrl = "jdbc:postgresql://" + pLocation + "/" + pDatabase;
@@ -54,21 +54,27 @@ public class RunMiddleware {
 			e.printStackTrace();
 		}
 
-		try {
-			Class.forName(JDBC_MysqlDRIVER);
-			connection = DriverManager
-					.getConnection(mUrl, mUsername, mPassword);
+		ReadMySQLDB rmysql = new ReadMySQLDB(
+				"C:\\Program Files (x86)\\MySQL\\MySQL Server 5.5\\bin\\",
+				mUsername, mPassword, mDatabase, mLocation);
 
-			statement = connection.createStatement(
-					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_UPDATABLE);
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//			Class.forName(JDBC_MysqlDRIVER);
+//			connection = DriverManager
+//					.getConnection(mUrl, mUsername, mPassword);
+//
+//			statement = connection.createStatement(ResultSet.TYPE_FORWARD_ONLY,
+//					ResultSet.CONCUR_READ_ONLY);
+//			// TYPE_FORWARD_ONLY = The cursor can only move forward in the
+//			// result set.
+//			// Creates a read-only result set.
+//		} catch (ClassNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 
 		mconnectedToDatabase = true;
 		pconnectedToDatabase = true;

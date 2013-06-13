@@ -32,7 +32,7 @@ public class RunMiddleware {
 	public static void main(String[] args) {
 		Properties configFile = new Properties();
 		try {
-			configFile.load(new FileInputStream("configuration.conf"));
+			configFile.load(new FileInputStream("C:\\Users\\Daniel\\Documents\\GitHub\\HeterogeneDBs\\configuration.conf"));
 
 			mLocation = configFile.getProperty("mysql.location");
 			mDatabase = configFile.getProperty("mysql.database");
